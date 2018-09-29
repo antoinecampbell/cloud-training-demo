@@ -1,0 +1,3 @@
+include "discovery"
+
+rootProject.name = "cloud-training-demo"

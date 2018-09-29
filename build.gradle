@@ -1,0 +1,24 @@
+group "com.antoinecampbell.cloud"
+version "1.0-SNAPSHOT"
+
+buildscript {
+    ext {
+        dockerGroup = "cloud-training"
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "se.transmode.gradle:gradle-docker:1.2"
+    }
+}
+
+allprojects {
+    apply plugin: "docker"
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
