@@ -1,0 +1,29 @@
+version: "2.4"
+services:
+  discovery:
+    image: cloud-training-demo/discovery
+    ports:
+      - "8761:8761"
+    mem_limit: 512M
+  config:
+    image: cloud-training-demo/config
+    environment:
+      - spring.profiles.active=docker
+    ports:
+      - "8888:8888"
+    mem_limit: 512M
+  user:
+    image: cloud-training-demo/user
+    environment:
+      - spring.profiles.active=docker
+    ports:
+      - "8090-8099:8090"
+    mem_limit: 512M
+  postgres:
+    image: postgres:11-alpine
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=user
+    ports:
+      - "5432:5432"
+    mem_limit: 256M

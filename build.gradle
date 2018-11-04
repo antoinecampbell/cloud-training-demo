@@ -2,9 +2,6 @@ group "com.antoinecampbell.cloud"
 version "1.0-SNAPSHOT"
 
 buildscript {
-    ext {
-        dockerGroup = "cloud-training"
-    }
     repositories {
         mavenCentral()
         jcenter()
@@ -21,4 +18,17 @@ allprojects {
         mavenCentral()
         jcenter()
     }
+
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+    }
+}
+
+ext {
+    kotlinVersion = "1.3.0"
+    springCloudVersion = "Finchley.SR1"
+    springBootVersion = "2.0.5.RELEASE"
+    baseJdkDockerImage = "openjdk:8-jre-alpine"
 }

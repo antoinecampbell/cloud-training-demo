@@ -1,0 +1,14 @@
+server:
+  port: 8010
+
+spring:
+  datasource:
+    url: jdbc:h2:./build/database/auth;AUTO_SERVER=TRUE
+    username: auth
+    password: auth
+
+---
+spring:
+  profiles: docker
+  datasource:
+    url: jdbc:postgresql://postgres:5432/auth

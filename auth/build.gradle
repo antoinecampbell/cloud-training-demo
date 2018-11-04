@@ -6,10 +6,10 @@ buildscript {
     }
 }
 
-apply plugin: "kotlin"
-apply plugin: "kotlin-spring"
-apply plugin: "org.springframework.boot"
-apply plugin: "io.spring.dependency-management"
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 sourceCompatibility = 1.8
 compileKotlin {
@@ -26,10 +26,21 @@ compileTestKotlin {
 }
 
 dependencies {
-    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+
+    implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
+    implementation('org.springframework.cloud:spring-cloud-starter-security')
+    
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    
+    runtimeOnly('com.h2database:h2')
+    runtimeOnly('org.postgresql:postgresql')
+    
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test')
 }
 
 dependencyManagement {
@@ -43,12 +54,12 @@ jar {
 }
 
 docker {
-    baseImage baseJdkDockerImage
+    baseImage "openjdk:8-jre-alpine"
 }
 
 task dockerImage(type: Docker, group: "docker", dependsOn: build) {
     applicationName = project.name
     addFile("$project.buildDir/libs/app.jar", "/app.jar")
-    exposePort(8761)
+    exposePort(8010)
     entryPoint(["java", "-jar", "app.jar"])
 }

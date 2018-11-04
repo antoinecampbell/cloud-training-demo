@@ -1,3 +1,6 @@
 include "discovery"
+include "user"
+include "auth"
+include "config"
 
 rootProject.name = "cloud-training-demo"

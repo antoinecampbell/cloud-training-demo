@@ -26,9 +26,15 @@ compileTestKotlin {
 }
 
 dependencies {
-    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
+    implementation('org.springframework.cloud:spring-cloud-starter-config')
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -43,12 +49,11 @@ jar {
 }
 
 docker {
-    baseImage baseJdkDockerImage
+    baseImage "openjdk:8-jre-alpine"
 }
 
 task dockerImage(type: Docker, group: "docker", dependsOn: build) {
     applicationName = project.name
     addFile("$project.buildDir/libs/app.jar", "/app.jar")
-    exposePort(8761)
     entryPoint(["java", "-jar", "app.jar"])
 }
