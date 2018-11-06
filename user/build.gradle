@@ -64,7 +64,7 @@ docker {
 
 task dockerImage(type: Docker, group: "docker", dependsOn: build) {
     applicationName = project.name
-    addFile("$project.buildDir/libs/app.jar", "/app.jar")
     exposePort(8090)
+    addFile("$project.buildDir/libs/app.jar", "/app.jar")
     entryPoint(["java", "-jar", "app.jar"])
 }

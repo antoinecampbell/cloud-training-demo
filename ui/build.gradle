@@ -24,6 +24,7 @@ task ngBuild(type: NpmTask, group: 'node', dependsOn: npmInstall) {
 
 task clean(type: Delete) {
   delete project.buildDir
+  delete "$project.buildDir/dist"
 }
 
 docker {
@@ -34,5 +35,4 @@ task dockerImage(type: Docker, group: "docker", dependsOn: ngBuild) {
   applicationName = project.name
   addFile("$projectDir/docker/default.conf", "/etc/nginx/conf.d/default.conf")
   addFile("$projectDir/dist/ui", "/usr/share/nginx/html/")
-  exposePort(80)
 }

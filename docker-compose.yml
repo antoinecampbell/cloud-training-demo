@@ -19,6 +19,12 @@ services:
     ports:
       - "8090-8099:8090"
     mem_limit: 512M
+  ui:
+    image: cloud-training-demo/ui
+    ports:
+      - "80:80"
+      - "443:443"
+    mem_limit: 64M
   postgres:
     image: postgres:11-alpine
     environment:
