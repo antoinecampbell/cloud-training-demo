@@ -54,7 +54,7 @@ jar {
 }
 
 docker {
-    baseImage "openjdk:8-jre-alpine"
+    baseImage baseJdkDockerImage
 }
 
 task dockerImage(type: Docker, group: "docker", dependsOn: build) {

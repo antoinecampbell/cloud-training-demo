@@ -1,0 +1,38 @@
+plugins {
+  id "com.moowork.node" version "1.2.0"
+}
+
+node {
+  version '9.4.0'
+}
+
+task unitTestCI(type: NpmTask, group: 'testing', dependsOn: npmInstall) {
+  args = ['run', 'test:ci']
+}
+
+task e2eTestCI(type: NpmTask, group: 'testing', dependsOn: npmInstall) {
+  args = ['run', 'e2e:ci']
+}
+
+task npmStart(type: NpmTask, group: 'node', dependsOn: npmInstall) {
+  args = ['start']
+}
+
+task ngBuild(type: NpmTask, group: 'node', dependsOn: npmInstall) {
+  args = ['run', 'build']
+}
+
+task clean(type: Delete) {
+  delete project.buildDir
+}
+
+docker {
+  baseImage baseNginxDockerImage
+}
+
+task dockerImage(type: Docker, group: "docker", dependsOn: ngBuild) {
+  applicationName = project.name
+  addFile("$projectDir/docker/default.conf", "/etc/nginx/conf.d/default.conf")
+  addFile("$projectDir/dist/ui", "/usr/share/nginx/html/")
+  exposePort(80)
+}

@@ -31,4 +31,5 @@ ext {
     springCloudVersion = "Finchley.SR1"
     springBootVersion = "2.0.5.RELEASE"
     baseJdkDockerImage = "openjdk:8-jre-alpine"
+    baseNginxDockerImage = "nginx:1.15-alpine"
 }
