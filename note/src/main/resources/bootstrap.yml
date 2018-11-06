@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: note-service
+
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://config:8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka

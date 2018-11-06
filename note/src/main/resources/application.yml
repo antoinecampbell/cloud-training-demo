@@ -1,0 +1,14 @@
+server:
+  port: 8030
+
+spring:
+  datasource:
+    url: jdbc:h2:./build/database/note;AUTO_SERVER=TRUE
+    username: note
+    password: note
+
+---
+spring:
+  profiles: docker
+  datasource:
+    url: jdbc:postgresql://postgres:5432/note
