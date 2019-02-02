@@ -1,6 +1,5 @@
 include "discovery"
 include "user"
-include "auth"
 include "config"
 include "ui"
 include "note"

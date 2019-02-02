@@ -12,12 +12,19 @@ services:
     ports:
       - "8888:8888"
     mem_limit: 512M
-  user:
+  user-service:
     image: cloud-training-demo/user
     environment:
       - spring.profiles.active=docker
     ports:
       - "8090-8099:8090"
+    mem_limit: 512M
+  note-service:
+    image: cloud-training-demo/note
+    environment:
+      - spring.profiles.active=docker
+    ports:
+      - "8030-8039:8030"
     mem_limit: 512M
   ui:
     image: cloud-training-demo/ui

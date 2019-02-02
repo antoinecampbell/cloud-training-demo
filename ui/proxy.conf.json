@@ -1,0 +1,24 @@
+{
+  "/user-service": {
+    "target": "http://localhost:8090",
+    "pathRewrite": {
+      "^/user-service": ""
+    },
+    "headers": {
+      "X-Forwarded-Host": "localhost:4200",
+      "X-Forwarded-Prefix": "user-service"
+    },
+    "secure": false
+  },
+  "/note-service": {
+    "target": "http://localhost:8030",
+    "pathRewrite": {
+      "^/note-service": ""
+    },
+    "headers": {
+      "X-Forwarded-Host": "localhost:4200",
+      "X-Forwarded-Prefix": "note-service"
+    },
+    "secure": false
+  }
+}

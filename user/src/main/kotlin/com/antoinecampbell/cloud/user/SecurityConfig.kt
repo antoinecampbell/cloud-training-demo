@@ -1,16 +1,17 @@
 package com.antoinecampbell.cloud.user
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension
@@ -32,7 +33,7 @@ class SecurityConfig {
     @Configuration
     @EnableWebSecurity
     class WebSecurityConfig @Autowired
-    constructor(@Qualifier("dataSource") private val dataSource: DataSource,
+    constructor(private val dataSource: DataSource,
                 private val passwordEncoder: PasswordEncoder) : WebSecurityConfigurerAdapter() {
 
         @Throws(Exception::class)
@@ -48,26 +49,20 @@ class SecurityConfig {
             source.registerCorsConfiguration("/**", config)
 
             http.csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .cors().configurationSource(source)
-                .and()
-                .httpBasic()
-                .and()
-                .authorizeRequests().antMatchers(HttpMethod.POST, "/users", "/users/").anonymous()
-                .and()
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .logout().logoutUrl("/logout")
         }
 
         @Throws(Exception::class)
-        override fun configure(auth: AuthenticationManagerBuilder?) {
-            auth!!.userDetailsService(userDetailsManager())
+        override fun configure(auth: AuthenticationManagerBuilder) {
+            auth.userDetailsService(userDetailsManager())
                 .passwordEncoder(passwordEncoder)
         }
 
         @Bean
         fun userDetailsManager(): UserDetailsManager {
-            val userDetailsManager = JdbcUserDetailsManager()
+            val userDetailsManager = JdbcUserDetailsManager(dataSource)
             userDetailsManager.setDataSource(dataSource)
             return userDetailsManager
         }
@@ -76,6 +71,12 @@ class SecurityConfig {
         fun securityEvaluationContextExtension(): SecurityEvaluationContextExtension {
             return SecurityEvaluationContextExtension()
         }
+
+        @Bean
+        override fun authenticationManagerBean(): AuthenticationManager {
+            return super.authenticationManagerBean()
+        }
+
     }
 
     @Configuration

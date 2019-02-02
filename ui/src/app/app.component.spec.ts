@@ -1,35 +1,59 @@
-import {async, TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
+import {DebugElement} from "@angular/core";
+import {UserService} from "./login/user.service";
+import {By} from "@angular/platform-browser";
+import {of} from "rxjs";
+import './rxjs-imports';
+import {SharedModule} from "./shared.module";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AppComponent', () => {
+  let de: DebugElement;
+  let component: AppComponent;
+  let userService: UserService;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        SharedModule,
         RouterTestingModule
       ],
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
+      providers: [
+        UserService
+      ]
+    }).compileComponents().then(() => {
+      fixture = TestBed.createComponent(AppComponent);
+      component = fixture.debugElement.componentInstance;
+      de = fixture.debugElement;
+      userService = TestBed.get(UserService);
+    });
   }));
 
+  beforeEach(() => {
+    userService.user = {name: 'user'};
+    spyOn(userService, "checkToken").and.returnValue(of(true));
+  });
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeDefined();
   });
 
-  it(`should have as title 'ui'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ui');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should show login button when signed out', () => {
+    userService.user = null;
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ui!');
+    const element = de.query(By.css('mat-toolbar [routerLink="/login"]'));
+    expect(element).toBeTruthy();
   });
+
+  it('should show page links when signed in', () => {
+    fixture.detectChanges();
+    const elements = de.queryAll(By.css('mat-toolbar a[mat-button]'));
+    expect(elements.length).toBe(2);
+  });
+
 });

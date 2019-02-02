@@ -1,11 +1,52 @@
 server:
   port: 8090
+  use-forward-headers: true
 
 spring:
   datasource:
     url: jdbc:h2:./build/database/user;AUTO_SERVER=TRUE
     username: user
     password: user
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    refresh:
+      # Needed to resolve bug using schema.sql with spring cloud
+      enabled: false
+
+cloud:
+  demo:
+    private-key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEpAIBAAKCAQEA9Qwz6YbPHTvRjYccDTrXHDRoIaFa5lrKOWbxWVnrBBQD/Rja
+      lbIIpuwj/73fhVRT2aRaUnx2KMI9AEbTgNGZZ7vwcZcc8F0HGRUxkt+pPVNSwXnu
+      /yYzvBqegmMpaZcGjC6cMTGoviBrLChsNoet3DZh5VcBMG2c22t6aNKiF3xUuwWM
+      ydv0QtPbI5bzDhRXNGGy4oLFZYcEc3he46JtuXweNi6sRrTbWOCOzlezGLcNma+W
+      I0uukioTeqz7dXkmrWocFKpIpsgfZx7vXV5clAx07jfKLb9O5qqLbk8x9pK4Hcth
+      GwCQcmJUOLOHhYB4NpWWNwto0VNe0qjWp6Nb8QIDAQABAoIBAQCZcbC4FLBwr9qC
+      cw4/wo6cnLxwAqf3AvcKhsmul72wahAtVnjZsAf27nuEUxM6XBm9eUsNx939m9Oy
+      7qbWTWlwKaFgn62BXd9p93l5bRB+1ERH3uCnaPaQXWLQZuOxuN5ivXUU4PG3THmP
+      xygr5T4bXPpkL90QxDKqu1yFcxAI/5olI9hH8EydvvDFfKfiy80cmQTNzF4Sbjsr
+      ZZa4fmZqkrA2c7D4uHbaSqPB94smS4jM4TYY2ljl3qc1BXEw/qo88aRF3cvCEJBr
+      GzvvKqveWEQwt4fLttC9u1T+VFEHZ/8Ffa4ZtsnmYiG9l39ErYyivFdV51jcOb2P
+      vJ2xMy0hAoGBAP08arIpt22nEgojJPINnwXqf02ETNG893JWa42avzL2CxJGI1xd
+      K0Dau22PnvI65Wq9qmshFyoOzOzOWEiRgE6srOlyM5N0c+LIdIPP8SQW6r2Rfcp1
+      +mS3PrL8NyUkv1CQgUWv1RlzViUmvgZQ5k8mR5cj+dXXNhq42PJ8ldolAoGBAPe4
+      6AxR3PVo3oiTEddI31D2NJSpDGTs3clsSC3CEyhXqjhoilLqnS5uamj9+W+MHsUa
+      qc+VEpvXpMht/tkzy8JosRz6m6CZZK1umM9FxZVbCIX80sxoZDvJ9snzTV10jztN
+      SDA1NFmuqbh5BHu6MVOrFC5YbqrFmRtE9Cz+PsLdAoGANtqDchw/M21hJvj948C3
+      lZx5/tyNl1ELeKTnn0DJ8cwCEe9HcZZs7Bt1RgI6N9YyI7D53ULJtb6G/TSlQvLh
+      jCkzO04VhfdPsuwg8Px2C487QdzmFpj/qBlZZ4PinhUbq+PhXKr9ygmFu35s4wlb
+      GgH8t+x/DacUfS1VMRFzlFECgYEAwo7nMUXaVKRYostfZ8ZEHkJAacGbimi+iEQT
+      LF0Qzs6LUmJIwXainKT7zhoqngFe6U9Xr0FVrDBhq0k4rz6O+dFfyXLKaAgRmmUS
+      fzg9RmCJATLgHMqgbpTgzxvX116EX/8Cg1pGE2mqwsfJTaOeuifTYdLymA05gsFV
+      RUEp6cECgYB/oQuwjYoQMfIZ2U1c6ya2ebrGSkPX2YH9l+M9BmufNEKX/kg6gYkh
+      9+/lAmCXbkLsyBxh5SAQkIc/D7V7PFClFMoaRyV5EE3F3a7v3vOGBteYyP1kE6Mi
+      gSOpZT+XYiILsN8OuKxpG7EoEa8p7y28wYTXS7gmGRdebLtcCPIgtw==
+      -----END RSA PRIVATE KEY-----
+    public-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1DDPphs8dO9GNhxwNOtccNGghoVrmWso5ZvFZWesEFAP9GNqVsgim7CP/vd+FVFPZpFpSfHYowj0ARtOA0Zlnu/BxlxzwXQcZFTGS36k9U1LBee7/JjO8Gp6CYylplwaMLpwxMai+IGssKGw2h63cNmHlVwEwbZzba3po0qIXfFS7BYzJ2/RC09sjlvMOFFc0YbLigsVlhwRzeF7jom25fB42LqxGtNtY4I7OV7MYtw2Zr5YjS66SKhN6rPt1eSatahwUqkimyB9nHu9dXlyUDHTuN8otv07mqotuTzH2krgdy2EbAJByYlQ4s4eFgHg2lZY3C2jRU17SqNano1vx cloud-demo
 
 ---
 spring:

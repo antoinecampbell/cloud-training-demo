@@ -1,11 +1,26 @@
 server:
   port: 8030
+  use-forward-headers: true
 
 spring:
   datasource:
     url: jdbc:h2:./build/database/note;AUTO_SERVER=TRUE
     username: note
     password: note
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    cloud:
+      refresh:
+        # Needed to resolve bug using schema.sql with spring cloud
+        enabled: false
+  main:
+    allow-bean-definition-overriding: true
+
+cloud:
+  demo:
+    public-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1DDPphs8dO9GNhxwNOtccNGghoVrmWso5ZvFZWesEFAP9GNqVsgim7CP/vd+FVFPZpFpSfHYowj0ARtOA0Zlnu/BxlxzwXQcZFTGS36k9U1LBee7/JjO8Gp6CYylplwaMLpwxMai+IGssKGw2h63cNmHlVwEwbZzba3po0qIXfFS7BYzJ2/RC09sjlvMOFFc0YbLigsVlhwRzeF7jom25fB42LqxGtNtY4I7OV7MYtw2Zr5YjS66SKhN6rPt1eSatahwUqkimyB9nHu9dXlyUDHTuN8otv07mqotuTzH2krgdy2EbAJByYlQ4s4eFgHg2lZY3C2jRU17SqNano1vx cloud-demo
 
 ---
 spring:

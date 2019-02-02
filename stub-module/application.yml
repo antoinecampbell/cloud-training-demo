@@ -7,6 +7,14 @@ spring:
     username: user
     password: user
 
+    jpa:
+      hibernate:
+        ddl-auto: validate
+      cloud:
+        refresh:
+          # Needed to resolve bug using schema.sql with spring cloud
+          enabled: false
+
 ---
 spring:
   profiles: docker

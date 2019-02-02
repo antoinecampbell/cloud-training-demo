@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {UserService} from "./login/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'ui';
+
+  constructor(public userService: UserService,
+              private router: Router) {
+  }
+
+  onLogout() {
+    this.userService.logout()
+      .subscribe({
+        complete: () => this.router.navigate(['/login']),
+        error: error => console.error(error)
+      });
+  }
 }
