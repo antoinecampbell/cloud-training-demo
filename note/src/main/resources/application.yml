@@ -21,6 +21,7 @@ spring:
 cloud:
   demo:
     public-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1DDPphs8dO9GNhxwNOtccNGghoVrmWso5ZvFZWesEFAP9GNqVsgim7CP/vd+FVFPZpFpSfHYowj0ARtOA0Zlnu/BxlxzwXQcZFTGS36k9U1LBee7/JjO8Gp6CYylplwaMLpwxMai+IGssKGw2h63cNmHlVwEwbZzba3po0qIXfFS7BYzJ2/RC09sjlvMOFFc0YbLigsVlhwRzeF7jom25fB42LqxGtNtY4I7OV7MYtw2Zr5YjS66SKhN6rPt1eSatahwUqkimyB9nHu9dXlyUDHTuN8otv07mqotuTzH2krgdy2EbAJByYlQ4s4eFgHg2lZY3C2jRU17SqNano1vx cloud-demo
+    user-service-auth-header-value: "Basic Y2xpZW50QXBwOnNlY3JldA=="
 
 ---
 spring:

@@ -9,15 +9,15 @@ export class DefaultHeaderInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Add default headers
     const requestWithHeaders = req.clone({
-      headers: DefaultHeaderInterceptorService.setHeaders(req.headers)
+      headers: DefaultHeaderInterceptorService.setHeaders(req, req.headers)
     });
     return next.handle(requestWithHeaders);
   }
 
-  private static setHeaders(headers: HttpHeaders): HttpHeaders {
+  private static setHeaders(req: HttpRequest<any>, headers: HttpHeaders): HttpHeaders {
     headers = headers.set('X-Requested-With', 'XMLHttpRequest');
     const token = sessionStorage.getItem(UserService.STORAGE_KEY_TOKEN);
-    if (token && !headers.get('Authorization')) {
+    if (req.url.indexOf('/oauth/') == -1 && token && !headers.get('Authorization')) {
       headers = headers.set('Authorization', `Bearer ${token}`)
     }
     return headers;

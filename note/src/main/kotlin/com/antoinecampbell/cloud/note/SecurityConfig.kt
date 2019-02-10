@@ -35,8 +35,6 @@ class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .cors().configurationSource(source)
-                .and()
-                .authorizeRequests().anyRequest().authenticated()
         }
     }
 
