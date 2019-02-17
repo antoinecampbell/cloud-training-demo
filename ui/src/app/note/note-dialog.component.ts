@@ -39,7 +39,7 @@ export class NoteDialogComponent {
       this.matDialogRef.close(savedNote);
     }, error => {
       this.matSnackBar.open('Error saving note', null,
-        {duration: 4000, verticalPosition: "top"});
+        {duration: 4000, verticalPosition: "bottom"});
       console.error(error);
     });
   }

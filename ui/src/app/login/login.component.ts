@@ -30,7 +30,7 @@ export class LoginComponent {
         this.router.navigate(['']);
       }, (error) => {
         this.matSnackBar.open('Error signing in', null,
-          {duration: 4000, verticalPosition: "top"});
+          {duration: 4000, verticalPosition: "bottom"});
         console.error(error);
       });
   }

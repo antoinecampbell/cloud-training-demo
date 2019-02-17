@@ -53,7 +53,7 @@ docker {
     baseImage baseJdkDockerImage
 }
 
-task dockerImage(type: Docker, group: "docker", dependsOn: build) {
+task dockerImage(type: Docker, group: "docker", dependsOn: assemble) {
     applicationName = project.name
     addFile("$project.buildDir/libs/app.jar", "/app.jar")
     entryPoint(["java", "-jar", "app.jar"])

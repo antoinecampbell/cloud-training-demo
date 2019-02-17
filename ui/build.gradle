@@ -33,6 +33,6 @@ docker {
 
 task dockerImage(type: Docker, group: "docker", dependsOn: ngBuild) {
   applicationName = project.name
-  addFile("$projectDir/docker/default.conf", "/etc/nginx/conf.d/default.conf")
-  addFile("$projectDir/dist/ui", "/usr/share/nginx/html/")
+  addFile(file("$projectDir/docker/default.conf"), "/etc/nginx/conf.d/default.conf")
+  addFile(file("$projectDir/dist/ui"), "/usr/share/nginx/html/")
 }

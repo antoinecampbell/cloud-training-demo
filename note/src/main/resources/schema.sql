@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS notes CASCADE;
-CREATE TABLE notes (
-  id          IDENTITY     NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  title       VARCHAR(100) NOT NULL,
-  description VARCHAR(2000),
-  owner       VARCHAR(50)  NOT NULL
-);

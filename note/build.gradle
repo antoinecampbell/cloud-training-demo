@@ -37,7 +37,7 @@ dependencies {
 
     implementation('org.springframework.cloud:spring-cloud-starter-oauth2')
     implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
-    implementation('org.springframework.cloud:spring-cloud-starter-config')
+//    implementation('org.springframework.cloud:spring-cloud-starter-config')
     implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 
     implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
@@ -64,7 +64,7 @@ docker {
     baseImage baseJdkDockerImage
 }
 
-task dockerImage(type: Docker, group: "docker", dependsOn: build) {
+task dockerImage(type: Docker, group: "docker", dependsOn: assemble) {
     applicationName = project.name
     exposePort(8030)
     addFile("$project.buildDir/libs/app.jar", "/app.jar")

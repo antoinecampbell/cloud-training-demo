@@ -45,10 +45,10 @@ export class RegisterComponent {
       }, (error: HttpErrorResponse) => {
         if (error && error.status === 409) {
           this.matSnackBar.open('Error username already taken', null,
-            {duration: 4000, verticalPosition: "top"});
+            {duration: 4000, verticalPosition: "bottom"});
         } else {
           this.matSnackBar.open('Error creating account', null,
-            {duration: 4000, verticalPosition: "top"});
+            {duration: 4000, verticalPosition: "bottom"});
         }
         console.error(error);
       });

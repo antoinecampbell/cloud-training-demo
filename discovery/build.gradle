@@ -46,7 +46,7 @@ docker {
     baseImage baseJdkDockerImage
 }
 
-task dockerImage(type: Docker, group: "docker", dependsOn: build) {
+task dockerImage(type: Docker, group: "docker", dependsOn: assemble) {
     applicationName = project.name
     exposePort(8761)
     addFile("$project.buildDir/libs/app.jar", "/app.jar")

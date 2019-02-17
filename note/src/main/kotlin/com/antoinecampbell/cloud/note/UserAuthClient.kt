@@ -20,5 +20,5 @@ interface UserAuthClient {
         consumes = ["application/x-www-form-urlencoded"],
         headers = ["Content-Type=application/x-www-form-urlencoded"])
     fun checkToken(params: Map<String, Any>,
-                     @RequestHeader(HttpHeaders.AUTHORIZATION) authHeaderValue: String): JsonNode
+                   @RequestHeader(HttpHeaders.AUTHORIZATION) authHeaderValue: String): JsonNode
 }

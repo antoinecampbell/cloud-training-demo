@@ -1,3 +1,11 @@
 spring:
   application:
     name: discovery
+
+---
+spring:
+  profiles: docker
+
+eureka:
+  instance:
+    prefer-ip-address: true
