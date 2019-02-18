@@ -1,39 +1,41 @@
 version: "2.4"
 services:
   discovery:
-    image: gcr.io/captech-microservices-training/cloud-training-demo/discovery
+    image: cloud-training-demo/discovery
     environment:
       - spring.profiles.active=docker
     ports:
       - "8761:8761"
-    mem_limit: 768M
+    mem_limit: 512M
   user-service:
-    image: gcr.io/captech-microservices-training/cloud-training-demo/user
+    image: cloud-training-demo/user
     environment:
       - spring.profiles.active=docker
     ports:
       - "8091-8099:8090"
-    mem_limit: 768M
+    mem_limit: 512M
     depends_on:
       - discovery
       - postgres
   note-service:
-    image: gcr.io/captech-microservices-training/cloud-training-demo/note
+    image: cloud-training-demo/note
     environment:
       - spring.profiles.active=docker
     ports:
       - "8031-8039:8030"
-    mem_limit: 768M
+    mem_limit: 512M
     depends_on:
       - discovery
       - postgres
       - user-service
   ui:
-    image: gcr.io/captech-microservices-training/cloud-training-demo/ui
+    image: cloud-training-demo/ui
     ports:
       - "80:80"
       - "443:443"
     mem_limit: 128M
+    volumes:
+      - ./ui/docker/default.conf/:/etc/nginx/conf.d/default.conf
     depends_on:
       - note-service
   postgres:
