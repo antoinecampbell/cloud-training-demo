@@ -13,7 +13,7 @@ services:
       - spring.profiles.active=docker
     ports:
       - "8091-8099:8090"
-    mem_limit: 768M
+    mem_limit: 1024M
     depends_on:
       - discovery
       - postgres
@@ -23,7 +23,7 @@ services:
       - spring.profiles.active=docker
     ports:
       - "8031-8039:8030"
-    mem_limit: 768M
+    mem_limit: 1024M
     depends_on:
       - discovery
       - postgres
