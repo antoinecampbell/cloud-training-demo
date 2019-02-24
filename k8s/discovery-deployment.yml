@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-deployment
+  labels:
+    app: discovery
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  revisionHistoryLimit: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: discovery
+  template:
+    metadata:
+      labels:
+        app: discovery
+    spec:
+      containers:
+        - name: discovery
+          image: gcr.io/captech-microservices-training/cloud-training-demo/discovery
+          resources:
+            requests:
+              memory: 768M
+          ports:
+            - containerPort: 8761
+          env:
+            - name: spring.profiles.active
+              value: docker
+
+
+

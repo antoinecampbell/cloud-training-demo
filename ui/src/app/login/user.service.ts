@@ -67,7 +67,7 @@ export class UserService implements IUserService {
   }
 
   createUser(user: any): Observable<any> {
-    return this.httpClient.post('/api/users', user);
+    return this.httpClient.post('/note-service/users', user);
   }
 
   handleTokenSuccess = (tokenResponse: any) => {

@@ -1,0 +1,8 @@
+docker {
+    baseImage "postgres:11-alpine"
+}
+
+task dockerImage(type: Docker, group: "docker") {
+    applicationName = project.name
+    addFile("init.sql", "/docker-entrypoint-initdb.d/init.sql")
+}

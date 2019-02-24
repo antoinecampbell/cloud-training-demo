@@ -39,7 +39,7 @@ services:
     depends_on:
       - note-service
   postgres:
-    image: postgres:11-alpine
+    image: cloud-training-demo/postgres
     environment:
       - POSTGRES_PASSWORD=password
     ports:

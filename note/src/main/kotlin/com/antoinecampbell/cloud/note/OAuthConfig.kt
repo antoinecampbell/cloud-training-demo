@@ -3,6 +3,7 @@ package com.antoinecampbell.cloud.note
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter
@@ -32,6 +33,8 @@ class OAuthConfig(@Value("\${cloud.demo.public-key:}") private val publicKeyText
 
         override fun configure(http: HttpSecurity) {
             http.authorizeRequests().antMatchers("/oauth/**").anonymous()
+                .and()
+                .authorizeRequests().antMatchers(HttpMethod.POST, "/users").anonymous()
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
         }

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: note-service-deployment
+  labels:
+    app: note-service
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  revisionHistoryLimit: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: note-service
+  template:
+    metadata:
+      labels:
+        app: note-service
+    spec:
+      containers:
+        - name: note-service
+          image: gcr.io/captech-microservices-training/cloud-training-demo/note
+          resources:
+            requests:
+              memory: 768M
+          ports:
+            - containerPort: 8030
+          env:
+            - name: spring.profiles.active
+              value: docker
+
+
+

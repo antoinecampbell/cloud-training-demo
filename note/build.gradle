@@ -68,5 +68,6 @@ task dockerImage(type: Docker, group: "docker", dependsOn: assemble) {
     applicationName = project.name
     exposePort(8030)
     addFile("$project.buildDir/libs/app.jar", "/app.jar")
+    addFile("$rootProject.rootDir/docker/wait-for-it.sh", "/wait-for-it.sh")
     entryPoint(["java", "-jar", "app.jar"])
 }

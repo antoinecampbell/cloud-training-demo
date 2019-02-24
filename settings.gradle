@@ -3,5 +3,6 @@ include "user"
 include "config"
 include "ui"
 include "note"
+include "postgres"
 
 rootProject.name = "cloud-training-demo"

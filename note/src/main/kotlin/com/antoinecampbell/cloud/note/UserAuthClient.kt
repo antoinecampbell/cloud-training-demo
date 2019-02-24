@@ -3,6 +3,7 @@ package com.antoinecampbell.cloud.note
 import com.fasterxml.jackson.databind.JsonNode
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -21,4 +22,9 @@ interface UserAuthClient {
         headers = ["Content-Type=application/x-www-form-urlencoded"])
     fun checkToken(params: Map<String, Any>,
                    @RequestHeader(HttpHeaders.AUTHORIZATION) authHeaderValue: String): JsonNode
+
+    @RequestMapping(path = ["/users"], method = [RequestMethod.POST],
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun createUser(params: Map<String, Any>): JsonNode
 }

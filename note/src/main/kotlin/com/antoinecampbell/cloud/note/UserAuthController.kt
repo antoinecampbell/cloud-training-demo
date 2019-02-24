@@ -2,6 +2,7 @@ package com.antoinecampbell.cloud.note
 
 import com.fasterxml.jackson.databind.JsonNode
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
@@ -30,4 +31,10 @@ class UserAuthController(private val userAuthClient: UserAuthClient,
 
         return userAuthClient.checkToken(paramMap, authHeaderValue)
     }
+
+    @RequestMapping(path = ["/users"], method = [RequestMethod.POST])
+    fun createUser(@RequestBody paramMap: Map<String, Any>): JsonNode {
+        return userAuthClient.createUser(paramMap)
+    }
+
 }

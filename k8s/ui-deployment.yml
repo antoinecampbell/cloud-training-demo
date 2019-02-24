@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-deployment
+  labels:
+    app: ui
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  revisionHistoryLimit: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: ui
+  template:
+    metadata:
+      labels:
+        app: ui
+    spec:
+      containers:
+        - name: ui
+          image: gcr.io/captech-microservices-training/cloud-training-demo/ui
+          resources:
+            requests:
+              memory: 128M
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ui-horizontal-scaler
+  labels:
+    app: ui
+spec:
+  minReplicas: 1
+  maxReplicas: 3
+  scaleTargetRef:
+    kind: Deployment
+    name: ui-deployment
+  targetCPUUtilizationPercentage: 10
