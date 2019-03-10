@@ -13,6 +13,12 @@
     ```bash
     docker-compose down -v
     ```
+    
+### View Applications
+- Note Web UI: http://localhost
+- Discovery Service UI: http://localhost:8761
+- PGAdmin: http://localhost:8000
+- Portainer: http://localhost:9000
 
 ## Google Kubernetes Engine (GKE)
 1. Set default zone
