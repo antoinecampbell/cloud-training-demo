@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: ui-horizontal-scaler
@@ -47,10 +47,4 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: ui-deployment
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 10
+  targetCPUUtilizationPercentage: 50
