@@ -36,6 +36,10 @@ class OAuthConfig(@Value("\${cloud.demo.public-key:}") private val publicKeyText
                 .and()
                 .authorizeRequests().antMatchers(HttpMethod.POST, "/users").anonymous()
                 .and()
+                .authorizeRequests().antMatchers("/actuator").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/actuator/*").permitAll()
+                .and()
                 .authorizeRequests().anyRequest().authenticated()
         }
     }

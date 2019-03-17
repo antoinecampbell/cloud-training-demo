@@ -28,12 +28,36 @@ spec:
             requests:
               memory: 768M
             limits:
-              cpu: 1
+              cpu: 0.5
           ports:
             - containerPort: 8030
           env:
             - name: spring.profiles.active
               value: docker
+            - name: feign.client.config.default.connectTimeout
+              value: "30000"
+            - name: feign.client.config.default.readTimeout
+              value: "30000"
+            - name: eureka.client.registry-fetch-interval-seconds
+              value: "10"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8030
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8030
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
 
 ---
 

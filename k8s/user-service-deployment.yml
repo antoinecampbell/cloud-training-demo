@@ -28,12 +28,30 @@ spec:
             requests:
               memory: 768M
             limits:
-              cpu: 1
+              cpu: 0.5
           ports:
             - containerPort: 8090
           env:
             - name: spring.profiles.active
               value: docker
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8090
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8090
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
 
 ---
 
@@ -56,4 +74,4 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 75
+          averageUtilization: 50

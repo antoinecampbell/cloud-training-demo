@@ -76,6 +76,10 @@ class OAuthConfig(@Value("\${cloud.demo.private-key:}") private val privateKeyTe
                 .and()
                 .authorizeRequests().antMatchers(HttpMethod.GET, "/users", "/users/").authenticated()
                 .and()
+                .authorizeRequests().antMatchers("/actuator").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/actuator/*").permitAll()
+                .and()
                 .authorizeRequests().anyRequest().authenticated()
         }
     }

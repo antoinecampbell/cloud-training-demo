@@ -21,6 +21,8 @@ services:
     image: cloud-training-demo/note
     environment:
       - spring.profiles.active=docker
+      - feign.client.config.default.connectTimeout=30000
+      - feign.client.config.default.readTimeout=30000
     ports:
       - "8031-8039:8030"
     mem_limit: 512M
