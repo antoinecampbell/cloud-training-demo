@@ -20,6 +20,11 @@
 - PGAdmin: http://localhost:8000
 - Portainer: http://localhost:9000
 
+## Apache Jmeter
+```bash
+jmeter -n -t test-plan.jmx -Jhostname=<hostname or IP>
+```
+
 ## Google Kubernetes Engine (GKE)
 1. Set default zone
     ```bash

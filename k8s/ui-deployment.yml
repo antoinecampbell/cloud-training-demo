@@ -27,12 +27,14 @@ spec:
           resources:
             requests:
               memory: 128M
+            limits:
+              cpu: 0.1
           ports:
             - containerPort: 80
 
 ---
 
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: ui-horizontal-scaler
@@ -40,8 +42,15 @@ metadata:
     app: ui
 spec:
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: 5
   scaleTargetRef:
+    apiVersion: apps/v1
     kind: Deployment
     name: ui-deployment
-  targetCPUUtilizationPercentage: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 10
