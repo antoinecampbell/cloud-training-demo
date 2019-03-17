@@ -62,6 +62,10 @@ jmeter -n -t test-plan.jmx -Jhostname=<hostname or IP>
     ```bash
     kubectl expose deployment ui-deployment --type=LoadBalancer --name=ui-service-balanced
     ```
+1. View Horizontal Pod Autoscalers
+    ```bash
+    kubectl get hpa
+    ```
 1. Delete load balanced UI service
     ```bash
     kubectl delete service ui-service-balanced
