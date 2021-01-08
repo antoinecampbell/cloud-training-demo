@@ -1,9 +1,9 @@
 plugins {
-  id "com.moowork.node" version "1.2.0"
+  id "com.github.node-gradle.node" version "2.2.4"
 }
 
 node {
-  version '9.4.0'
+  version '14.15.4'
 }
 
 task unitTestCI(type: NpmTask, group: 'testing', dependsOn: npmInstall) {
