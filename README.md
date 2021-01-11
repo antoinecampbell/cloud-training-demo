@@ -21,25 +21,17 @@
     ```bash
     kubectl apply -f ./ --record
     ``` 
-1. Expose UI service externally via a node port
-    ```bash
-    kubectl expose service ui-service --type=NodePort --name=ui-service-node-port --port=30080
-    ```
 1. Get minikube IP address
     ```bash
     minikube ip
     ```
-1. View the exposed node port
+1. View the exposed ui-service node port
     ```bash
-    kubectl get service ui-service-node-port
+    kubectl get service ui-service
     ```
 1. View the UI app using the minikube IP and service NodePort
     - http://<minibuke IP>:30080
     - http://192.168.99.102:30080
-1. Delete the exposed node port
-    ```bash
-    kubectl delete service ui-service-node-port
-    ```
 1. All deployments and services
     ```bash
     kubectl delete -f ./
