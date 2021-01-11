@@ -1,3 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  selector:
+    app: postgres
+  type: NodePort
+  ports:
+    - port: 5432
+      nodePort: 30003
+      protocol: TCP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +38,8 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: gcr.io/captech-microservices-training/cloud-training-demo/postgres
+          image: cloud-training-demo/postgres
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: 256M

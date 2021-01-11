@@ -1,3 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: note-service
+  labels:
+    app: note-service
+spec:
+  selector:
+    app: note-service
+  type: NodePort
+  ports:
+    - port: 8030
+      nodePort: 30030
+      protocol: TCP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +38,8 @@ spec:
     spec:
       containers:
         - name: note-service
-          image: gcr.io/captech-microservices-training/cloud-training-demo/note
+          image: cloud-training-demo/note
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: 768M

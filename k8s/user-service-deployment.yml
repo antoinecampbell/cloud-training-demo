@@ -1,3 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  labels:
+    app: user-service
+spec:
+  selector:
+    app: user-service
+  type: NodePort
+  ports:
+    - port: 8090
+      nodePort: 30090
+      protocol: TCP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +38,8 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: gcr.io/captech-microservices-training/cloud-training-demo/user
+          image: cloud-training-demo/user
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: 768M

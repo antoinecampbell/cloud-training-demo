@@ -1,5 +1,49 @@
 # Cloud Training Demo Commands
 
+## Minikube
+1. Start minikube
+    ```shell script
+    minikube start --driver=virtualbox --cpus=4 --memory=4096MB
+    ```
+1. Set local docker context to minikube
+    ```shell script
+     eval $(minikube -p minikube docker-env)
+    ```
+1. Build all service docker images on minikube
+    ```shell script
+     ./gradlew dockerImage
+    ```
+1. Navigate to the project kubernetes folder
+    ```bash
+    cd cloud-training-demo/k8s/
+    ```
+1. Run Kubernetes deployments and services
+    ```bash
+    kubectl apply -f ./ --record
+    ``` 
+1. Expose UI deployment externally via a load balancer
+    ```bash
+    kubectl expose deployment ui-deployment --type=NodePort --name=ui-service-node-port --port=30080
+    ```
+1. Get minikube ip address
+    ```bash
+    minikube ip
+    ```
+1. View the exposed node port
+    ```bash
+    kubectl get service ui-service-node-port
+    ```
+1. View the UI app using the minikube IP and service NodePort
+    - http://<minibuke IP>:30080
+    - http://192.168.99.102:30080
+1. Delete the exposed node port
+    ```bash
+    kubectl delete service ui-service-node-port
+    ```
+1. All deployments and services
+    ```bash
+    kubectl delete -f ./
+    ```
 ## Google Compute Engine
 1. Start all services
     ```bash
