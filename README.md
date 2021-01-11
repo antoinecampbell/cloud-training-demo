@@ -21,11 +21,11 @@
     ```bash
     kubectl apply -f ./ --record
     ``` 
-1. Expose UI deployment externally via a load balancer
+1. Expose UI service externally via a node port
     ```bash
-    kubectl expose deployment ui-deployment --type=NodePort --name=ui-service-node-port --port=30080
+    kubectl expose service ui-service --type=NodePort --name=ui-service-node-port --port=30080
     ```
-1. Get minikube ip address
+1. Get minikube IP address
     ```bash
     minikube ip
     ```
