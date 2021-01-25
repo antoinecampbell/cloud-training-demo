@@ -1,5 +1,11 @@
 # Cloud Training Demo Commands
 
+## Setup
+1. Build docker images
+    ```shell script
+    ./gradlew dockerImage
+    ```
+
 ## Minikube
 1. Start minikube
     ```shell script
@@ -54,7 +60,7 @@
     kustomize build . | kubectl delete -f -
     ```
 
-## Google Compute Engine
+## Docker Compose
 1. Start all services
     ```shell script
     docker-compose up -d
