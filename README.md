@@ -36,7 +36,7 @@
     kubectl get service ui-service
     ```
 1. View the UI app using the minikube IP and service NodePort
-    - http://<minibuke IP>:30080, e.g. http://192.168.99.102:30080
+    - http://&lt;minibuke IP>:30080, e.g. http://192.168.99.102:30080
 1. Delete all resources
     ```shell script
     kubectl delete -f ./
