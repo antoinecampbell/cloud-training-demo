@@ -14,39 +14,57 @@
      ./gradlew dockerImage
     ```
 1. Navigate to the project kubernetes folder
-    ```bash
-    cd cloud-training-demo/k8s/
+    ```shell script
+    cd k8s/
     ```
-1. Run Kubernetes deployments and services
-    ```bash
+1. Deploy all resources
+    ```shell script
     kubectl apply -f ./ --record
     ``` 
 1. Get minikube IP address
-    ```bash
+    ```shell script
     minikube ip
     ```
 1. View the exposed ui-service node port
-    ```bash
+    ```shell script
     kubectl get service ui-service
     ```
 1. View the UI app using the minikube IP and service NodePort
-    - http://<minibuke IP>:30080
-    - http://192.168.99.102:30080
-1. All deployments and services
-    ```bash
+    - http://<minibuke IP>:30080, e.g. http://192.168.99.102:30080
+1. Delete all resources
+    ```shell script
     kubectl delete -f ./
     ```
+
+## Kustomize
+1. Install kustomize
+    ```shell script
+    brew install kustomize
+    ```
+1. Deploy all resources, from the `k8s` directory
+    ```shell script
+    kustomize build . | kubectl apply -f -
+    ```
+1. Deploy patched resources, from the `kustomize/dev` directory
+    ```shell script
+    kustomize build . | kubectl apply -f -
+    ```
+1. Delete all resources, from the `k8s` directory
+    ```shell script
+    kustomize build . | kubectl delete -f -
+    ```
+
 ## Google Compute Engine
 1. Start all services
-    ```bash
+    ```shell script
     docker-compose up -d
     ```
 1. Scale note service
-    ```bash
+    ```shell script
     docker-compose scale note-service=2
     ```
-1. Destroy all services
-    ```bash
+1. Destroy all resources
+    ```shell script
     docker-compose down -v
     ```
     
@@ -57,56 +75,56 @@
 - Portainer: http://localhost:9000
 
 ## Apache Jmeter
-```bash
+```shell script
 jmeter -n -t test-plan.jmx -Jhostname=<hostname or IP>
 ```
 
 ## Google Kubernetes Engine (GKE)
 1. Set default zone
-    ```bash
+    ```shell script
     gcloud config set compute/zone us-east1-b
     ```
 1. List GKE clusters
-    ```bash
+    ```shell script
     gcloud container clusters list
     ```
 1. Conntect to GKE cluster
-    ```bash
+    ```shell script
     gcloud container clusters get-credentials --zone=us-east1-b <cluster-name>
     ```
 1. List nodes
-    ```bash
+    ```shell script
     kubectl get nodes
     ```
 1. Navigate to the project kubernetes folder
-    ```bash
-    cd cloud-training-demo/k8s/
+    ```shell script
+    cd k8s/
     ```
-1. Run Kubernetes deployments and services
-    ```bash
+1. Deploy all resources
+    ```shell script
     kubectl apply -f ./ --record
     ```
 1. View running pods
-    ```bash
+    ```shell script
     kubectl get pods
     ```
 1. View services
-    ```bash
+    ```shell script
     kubectl get services
     ```
 1. Expose UI deployment externally via a load balancer
-    ```bash
+    ```shell script
     kubectl expose deployment ui-deployment --type=LoadBalancer --name=ui-service-balanced
     ```
 1. View Horizontal Pod Autoscalers
-    ```bash
+    ```shell script
     kubectl get hpa
     ```
 1. Delete load balanced UI service
-    ```bash
+    ```shell script
     kubectl delete service ui-service-balanced
     ```
 1. All deployments and services
-    ```bash
+    ```shell script
     kubectl delete -f ./
     ```

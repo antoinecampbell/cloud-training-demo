@@ -48,6 +48,21 @@ spec:
           env:
             - name: spring.profiles.active
               value: docker
-
-
-
+          readinessProbe:
+            httpGet:
+              port: 8761
+              path: /actuator/health
+            initialDelaySeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+          livenessProbe:
+            httpGet:
+              port: 8761
+              path: /actuator/health
+            initialDelaySeconds: 10
+            successThreshold: 1
+            failureThreshold: 2
+            periodSeconds: 10
+            timeoutSeconds: 5
