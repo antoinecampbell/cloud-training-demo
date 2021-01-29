@@ -15,7 +15,7 @@
     ```bash
      eval $(minikube -p minikube docker-env)
     ```
-1. Build all service docker images on minikube
+1. Build all docker images on minikube
     ```bash
      ./gradlew dockerImage
     ```
@@ -51,7 +51,7 @@
     ```bash
      eval $(minikube -p minikube docker-env)
     ```
-1. Build all service docker images on minikube
+1. Build all docker images on minikube
     ```bash
      ./gradlew dockerImage
     ```
