@@ -10,7 +10,6 @@ import {AuthGuard} from "./login/auth-guard.service";
 import {AnonymousGuard} from "./login/anonymous-guard.service";
 import {NoteComponent} from "./note/note.component";
 import {NoteDialogComponent} from "./note/note-dialog.component";
-import {NoteDialogPagerComponent} from "./note/note-dialog-pager.component";
 import {of} from "rxjs";
 import {catchError, flatMap} from "rxjs/operators";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
@@ -33,7 +32,6 @@ export function appInit(userService: UserService): Function {
     LoginComponent,
     NoteComponent,
     NoteDialogComponent,
-    NoteDialogPagerComponent,
   ],
   imports: [
     SharedModule,
@@ -41,7 +39,6 @@ export function appInit(userService: UserService): Function {
   ],
   entryComponents: [
     NoteDialogComponent,
-    NoteDialogPagerComponent
   ],
   providers: [
     {
